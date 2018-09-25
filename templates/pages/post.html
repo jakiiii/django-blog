@@ -1,0 +1,127 @@
+{% extends 'index.html' %}
+{% block title %}{{ title }} || {{ block.super }}{% endblock title %}
+{% load static %}
+
+{% block content%}
+
+    <section class="post-area">
+		<div class="container">
+
+			<div class="row">
+
+				<div class="col-lg-1 col-md-0"></div>
+				<div class="col-lg-10 col-md-12">
+
+					<div class="main-post">
+
+						<div class="post-top-area">
+
+							<h5 class="pre-title">{{ object.category }}</h5>
+
+							<h3 class="title"><a href="#"><b>{{ object.title }}</b></a></h3>
+
+							<div class="post-info">
+
+								<div class="left-area">
+									<a class="avatar" href="#"><img src="{% static 'images/jaki.png' %}" alt="{{ object.owner }}"></a>
+								</div>
+
+								<div class="middle-area">
+									<a class="name" href="#"><b>{{ object.owner }}</b></a>
+									<h6 class="date">{{ object.date_time }}</h6>
+								</div>
+
+							</div><!-- post-info -->
+
+						</div><!-- post-top-area -->
+                        {% if object.image %}
+						    <div class="post-image"><img src="{{ MEDIA_URL }}{{ object.image.url }}" alt="{{ object.title }}" height="300px"></div>
+                        {% endif %}
+
+						<div class="post-bottom-area">
+
+							<p class="para">{{ object.description }}</p>
+
+							<ul class="tags">
+								<li><a href="#">Mnual</a></li>
+								<li><a href="#">Liberty</a></li>
+								<li><a href="#">Recommendation</a></li>
+								<li><a href="#">Inspiration</a></li>
+							</ul>
+
+							<div class="post-icons-area">
+								<ul class="post-icons">
+									<li><a href="#"><i class="ion-heart"></i>57</a></li>
+									<li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
+									<li><a href="#"><i class="ion-eye"></i>138</a></li>
+								</ul>
+
+								<ul class="icons">
+									<li>SHARE : </li>
+									<li><a href="#"><i class="ion-social-facebook"></i></a></li>
+									<li><a href="#"><i class="ion-social-twitter"></i></a></li>
+									<li><a href="#"><i class="ion-social-pinterest"></i></a></li>
+								</ul>
+							</div>
+
+							<div class="post-footer post-info">
+
+								<div class="left-area">
+									<a class="avatar" href="#"><img src="{% static 'images/jaki.png' %}" alt="{{ object.owner }}"></a>
+								</div>
+
+								<div class="middle-area">
+									<a class="name" href="#"><b>{{ object.owner }}</b></a>
+									<h6 class="date">{{ object.date }}</h6>
+								</div>
+
+							</div><!-- post-info -->
+
+						</div><!-- post-bottom-area -->
+
+					</div><!-- main-post -->
+				</div><!-- col-lg-8 col-md-12 -->
+			</div><!-- row -->
+		</div><!-- container -->
+	</section><!-- post-area -->
+    <!-- end of post details -->
+
+
+    <section class="recomended-area section">
+		<div class="container">
+			<div class="row">
+
+                {% for r_post in related_post %}
+				<div class="col-lg-4 col-md-6">
+					<div class="card h-100">
+						<div class="single-post post-style-1">
+                            {% if r_post.image %}
+							    <div class="blog-image"><img src="{{ MEDIA_URL }}{{ post.image.url }}" alt="{{ r_post.title }}" width="350px" height="200px"></div>
+                            {% else %}
+							    <div class="blog-image"><img src="{% static 'images/no_image.png' %}" alt="Blog Image"></div>
+                            {% endif %}
+
+							<a class="avatar" href="#"><img src="{% static 'images/jaki.png' %}" alt="Profile Image"></a>
+
+							<div class="blog-info">
+
+								<h4 class="title"><a href="{{ r_post.get_absolute_url }}"><b>{{ r_post.title }}</b></a></h4>
+
+								<ul class="post-footer">
+									<li><a href="#"><i class="ion-bookmark"></i>{{ r_post.category }}</a></li>
+									<li><a href="#"><i class="ion-eye"></i>138</a></li>
+								</ul>
+
+							</div><!-- blog-info -->
+						</div><!-- single-post -->
+					</div><!-- card -->
+				</div><!-- col-lg-4 col-md-6 -->
+                {% endfor %}
+
+			</div><!-- row -->
+
+		</div><!-- container -->
+	</section>
+
+
+{% endblock %}

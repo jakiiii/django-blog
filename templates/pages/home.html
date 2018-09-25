@@ -1,0 +1,66 @@
+{% extends 'index.html' %}
+{% block title %}{{ title }} || {{ block.super }}{% endblock title %}
+{% load static %}
+
+{% block content %}
+<section class="blog-area section">
+		<div class="container">
+
+			<div class="row">
+            {% for post in posts_list %}
+				<div class="col-lg-4 col-md-6">
+					<div class="card h-100">
+						<div class="single-post post-style-1">
+                            {% if post.image %}
+							    <div class="blog-image"><img src="{{ MEDIA_URL }}{{ post.image.url }}" alt="{{ post.title }}" width="350px" height="200px"></div>
+                            {% else %}
+							    <div class="blog-image"><img src="{% static 'images/no_image.png' %}" alt="Blog Image"></div>
+                            {% endif %}
+
+							<a class="avatar" href="#"><img src="{% static 'images/jaki.png' %}" alt="Profile Image"></a>
+
+							<div class="blog-info">
+
+								<h4 class="title"><a href="{{ post.get_absolute_url }}"><b>{{ post.title }}</b></a></h4>
+
+								<ul class="post-footer">
+									<li><a href="#"><i class="ion-bookmark"></i>{{ post.category }}</a></li>
+{#									<li><a href="#"><i class="ion-heart"></i>57</a></li>#}
+{#									<li><a href="#"><i class="ion-chatbubble"></i>6</a></li>#}
+									<li><a href="#"><i class="ion-eye"></i>138</a></li>
+								</ul>
+
+							</div><!-- blog-info -->
+						</div><!-- single-post -->
+					</div><!-- card -->
+				</div><!-- col-lg-4 col-md-6 -->
+            {% endfor %}
+			</div><!-- row -->
+
+            <!-- start pagination -->
+            <!-- pagination -->
+            <div>
+                {% if is_paginated %}
+                    <ul class="pagination">
+                        <li class="page-item">
+                            {% if page_obj.has_previous %}
+                                <a class="page-link" href="/?page={{ page_obj.previous_page_number }}">Prev</a>
+                            {% endif %}
+                        </li>
+                        <li class="page-item active">
+                            <button class="page-link">{{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</button>
+                        </li>
+                        <li class="page-item">
+                            {% if page_obj.has_next %}
+                                <a class="page-link" href="/?page={{ page_obj.next_page_number }}">Next</a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                {% endif %}
+            </div>
+{#			<a class="load-more-btn" href="#"><b>LOAD MORE</b></a>#}
+            <!-- end pagination -->
+
+		</div><!-- container -->
+	</section><!-- section -->
+{% endblock %}

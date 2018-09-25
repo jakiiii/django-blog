@@ -1,0 +1,18 @@
+{% load static %}
+<header>
+		<div class="container-fluid position-relative no-side-padding">
+
+			<a href="/" class="logo"><img src="{% static 'images/jaki.png' %}" class="img card-img" alt="Logo Image"></a>
+
+			<div class="menu-nav-icon" data-nav-menu="#main-menu"><i class="ion-navicon"></i></div>
+
+			<!-- start main-menu -->
+            {% include 'base/main-menu.html' %}
+            <!-- end main-menu -->
+
+            <!-- start search area -->
+            {% include 'base/search.html' %}
+            <!-- end search area -->
+
+		</div><!-- conatiner -->
+	</header>

@@ -1,0 +1,66 @@
+{% extends 'index.html' %}
+{% block title %}REGISTRATION || {{ block.super }}{% endblock title %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+    <section class="blog-area section">
+        <div class="container">
+            <h2 class="font-weight-bold">
+                {% if messages %}
+                    <div class="messages">
+                        {% for message in messages %}
+                            <span{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                        jQurity
+                {% endif %}
+            </h2><br />
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="card text-left col-md-6">
+                    <div class="card-header text-white bg-info"><h4><b>Login</b></h4></div>
+                    <div class="card-body">
+                        <form method="post">{% csrf_token %}
+{#                            {{ form.as_p }}#}
+
+                            {% for hidden in form.hidden_fields %}
+                                {{ hidden }}
+                            {% endfor %}
+
+                            {% for field in form.visible_fields %}
+                                <div class="form-group row">
+                                    <label for="{{ field.auto_id }}" class="col-md-4 col-form-label text-left"><b>{{ field.label_tag }}</b></label>
+                                    {% if form.is_bound %}
+                                        {% if field.errors %}
+                                            {% render_field field class="form-control is-invalid" %}
+                                            {% for error in field.errors %}
+                                                <div class="invalid-feedback">
+                                                    {{ error }}
+                                                </div>
+                                            {% endfor %}
+                                        {% else %}
+                                            {% render_field field class="form-control is-valid" %}
+                                        {% endif %}
+                                    {% else %}
+                                        <div class="col-md-8">
+                                            {% render_field field class="form-control" %}
+                                        </div>
+                                    {% endif %}
+                                </div><!-- end of form -->
+                            {% endfor %}
+
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label"></label>
+                                <div class="col-sm-8">
+                                    <button type="submit" class="btn btn-danger btn-sm btn-block">Sign in</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div><!-- end of login -->
+            </div>
+        </div>
+    </section>
+{% endblock %}

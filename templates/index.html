@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>{% block title %}Jqurity{% endblock title %}</title>
+    {% include 'base/head.html' %}
+
+</head>
+<body>
+    <!-- start header tag -->
+    {% include 'base/header.html' %}
+    <!-- end header tag -->
+
+	<div class="slider">
+        {% for cover in cover_list %}
+        <img src="{{ MEDIA_URL }}{{ cover.cover_image.url }}" width="100%" height="400px" alt="{{ cover.title }}" />
+        {% endfor %}
+    </div><!-- slider -->
+
+    <!-- start main-content -->
+
+    {% block content %}{% endblock %}
+    <!-- end main-content -->
+
+
+	<footer>
+        {% include 'base/footer.html' %}
+	</footer>
+
+	<!-- SCIPTS -->
+    {% include 'base/js.html' %}
+
+</body>
+</html>

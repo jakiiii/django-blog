@@ -1,0 +1,56 @@
+{% extends 'index.html' %}
+{% block title %}REGISTRATION || {{ block.super }}{% endblock title %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+    <section class="blog-area section">
+        <div class="container">
+            <table class="table table-dark">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for arc in archive_list %}
+                    <tr>
+                        <th scope="row" width="100">1</th>
+                        <td class="text-left" width="500">{{ arc.title }}</td>
+                        <td width="200">{{ arc.date }}</td>
+                        <td>
+                            <a href="{{ arc.get_absolute_url }}" class="btn btn-sm btn-info">Detail</a>
+                            <a href="{% url 'update' arc.slug %}" class="btn btn-sm btn-primary">Edit</a>
+                            <a href="{% url 'delete' arc.slug %}" class="btn btn-sm btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <!-- pagination -->
+            <div>
+                {% if is_paginated %}
+                    <ul class="pagination">
+                        <li class="page-item">
+                            {% if page_obj.has_previous %}
+                                <a class="page-link" href="/archive/?page={{ page_obj.previous_page_number }}">Prev</a>
+                            {% endif %}
+                        </li>
+                        <li class="page-item active">
+                            <button class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</button>
+                        </li>
+                        <li class="page-item">
+                            {% if page_obj.has_next %}
+                                <a class="page-link" href="/archive/?page={{ page_obj.next_page_number }}">Next</a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'index.html' %}
+{% block title %}{{ title }} || {{ block.super }}{% endblock title %}
+
+{% block content %}
+
+    <section class="blog-area section">
+        <div class="container">
+            <form method="post">{% csrf_token %}
+                <p>Are you sure you want to delete <span class="h5 text-danger">{{ object }}?</span></p>
+                <input type="submit" class="btn btn-lg btn-danger" value="Confirm" />
+            </form>
+        </div>
+    </section>
+
+{% endblock %}

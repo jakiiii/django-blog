@@ -1,0 +1,16 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ title }} | jQurity{% endblock %}
+{% block extrastyle %}
+    <style>
+    div#header{
+        background: #0b2e13;
+    }
+    </style>
+{% endblock %}
+
+{% block branding %}
+    <h1 id="site-name"><a href="{% url 'admin:index' %}"><b>jQurity</b></a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
